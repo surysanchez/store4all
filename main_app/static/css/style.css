@@ -1,0 +1,65 @@
+:root {
+  --primary-color: #af7b49;
+  --secondary-color: #edf1d5;
+  --tertiary-color: #b39c58;
+}
+
+nav {
+  background-color: var(--primary-color);
+}
+
+.page-footer {
+  background-color: var(--primary-color);
+}
+
+.container {
+  width: 90%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.nav-content a {
+  color: black;
+}
+
+.nav-content i.material-icons {
+  color: var(--primary-color);
+}
+
+#lower a {
+  color: var(--primary-color);
+}
+
+#welcome-name > a {
+  color: black;
+  text-decoration: underline;
+}
+
+.small-card {
+  height: 250px;
+}
+
+.card {
+  border-radius: 1vmin;
+}
+
+.card-image {
+  border-top-right-radius: 1vmin;
+  border-top-left-radius: 1vmin;
+}
+
+.search-bar {
+  border: 1px black solid;
+}
+
+.category-container {
+  background-color: var(--primary-color);
+}

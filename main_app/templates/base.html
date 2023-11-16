@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Market Urself</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <nav class="nav-extended">
+            <div class="nav-wrapper">
+                <div class="col s3">
+
+                    <ul>
+                        <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Market Urself</a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col s5 offset-s4">
+                        <form action="{% url 'search' %}" method="GET">
+                            <div class="input-field">
+                                <input id="search-bar" type="search valign-wrapper" name="q" class="white bordered" placeholder="Find it local" style="border-radius: 5vmin;">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="right">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'managers_detail' %}"><i class="material-icons">storefront</i></a></li>
+                        <ul class="right">
+                            <li>
+                                <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                                    <!-- <i class="material-icons">arrow_drop_down</i> -->
+                                    <i class="material-icons">account_circle</i>
+                                </a>
+                            </li>
+                        </ul>
+                        {% else %}
+                        <li><a href="/accounts/login/">Sign in</a></li>
+                        <li><a href="{% url 'signup' %}">Create Account</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'cart' %}"><i class="material-icons">shopping_cart</i></a></li>
+                        {% if user.cartitems %}
+                        {{cart}}
+                        {% endif %}
+                    </ul>
+            </div>
+        </div>
+            <div class="nav-content center-align">
+                <ul class="tabs tabs-fixed-width center-align">
+                    <li class="tab" data-tooltip="Wearables"> <a href="/wearables"><i class="material-icons">watch</i><br>Wearables</a></li>
+                    <li class="tab"> <a href="/consumables"><i class="material-icons">free_breakfast</i>Consumables</a></li>
+                    <li class="tab"> <a href="/homeables"><i class="material-icons">home</i>Homeables</a></li>
+                    <li class="tab"> <a href="/gardenables"><i class="material-icons">local_florist</i>Gardenables</a></li>
+                    <li class="tab"> <a href="/entertainables"><i class="material-icons">videogame_asset</i>Entertainables</a></li>
+                    <li class="tab"> <a href="/miscellaneous"><i class="material-icons">more_vert</i>Miscellaneous</a></li>
+                </ul>
+            </div>
+            <div class="nav-content center-align">
+                <ul class="tabs tabs-fixed-width center-align">
+                    <li class="tab" id="lower"> <a href="/wearables">Wearables</a></li>
+                    <li class="tab" id="lower"> <a href="/consumables">Consumables</a></li>
+                    <li class="tab" id="lower"> <a href="/homeables">Homeables</a></li>
+                    <li class="tab" id="lower"> <a href="/gardenables">Gardenables</a></li>
+                    <li class="tab" id="lower"> <a href="/entertainables">Entertainables</a></li>
+                    <li class="tab" id="lower"> <a href="/miscellaneous">Miscellaneous</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s6">
+                    <h5 class="white-text center-align">About Us</h5>
+                    <p class="grey-text text-lighten-4">Our platform offers a unique shopping experience where you can discover and purchase locally sourced products, including food, goods, entertainment, and home items.</p>
+                </div>
+                <div class="col s6">
+                    <h5 class="white-text center-align">Mission</h5>
+                    <p class="grey-text text-lighten-4">Our mission is to support local businesses and promote sustainable practices by connecting consumers with high-quality, locally sourced products. By prioritizing local sourcing and production, we aim to keep money circulating in the local economy and reduce the environmental impact of transportation and packaging.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="right">All Rights Reserved, &copy; 2023 Market Urself &nbsp;</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+{% if user.is_authenticated %}
+<ul id="dropdown1" class="dropdown-content">
+    <li>Logged in as {{user.username}}</li>
+    <li><a href="{% url 'profiles_detail' user.id %}">My Profile</a></li>
+    <li><a href="/managers/detail/">My Table</a></li>
+    <li><a href="/accounts/logout/">Logout</a></li>
+</ul>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems);
+    });
+</script>

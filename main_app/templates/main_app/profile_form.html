@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if profile %}
+<h3> Be sure to save if you make any changes!</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <input type="submit" class="btn" value="Save Changes">
+</form>
+{% else %}
+<h3>Almost Done!</h3>
+<h4>Just add a few more details!</h4>
+<form action="" method="POST">
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <input type="submit" class="btn" value="Create Profile">
+</form>
+{% endif %}
+<br><br>
+
+{% endblock %}
